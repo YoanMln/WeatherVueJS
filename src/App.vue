@@ -11,7 +11,8 @@ const onListClick = () => {
     <h1>Weather</h1>
     <nav>
       <router-link to="/">Accueil</router-link>
-      <router-link to="/villes">Villes</router-link>
+      <router-link to="/villes">ListVilles</router-link>
+      <router-link to="/city">Ville</router-link>
     </nav>
     <button @click="onListClick">Cliquez !</button>
     <RouterView></RouterView>
