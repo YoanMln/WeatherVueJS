@@ -10,10 +10,25 @@ const city = reactive({
 </script>
 
 <template>
-  <h1>{{ city.name }}</h1>
-  <p>Météo {{ city.weather }}</p>
-  <p>Température {{ city.temperature }}</p>
-  <p>MAJ {{ city.updateAt.toLocaleString() }}</p>
+  <div class="city-container">
+    <h1>{{ city.name }}</h1>
+    <p>Météo {{ city.weather }}</p>
+    <p>Température {{ city.temperature }}</p>
+    <p>MAJ {{ city.updateAt.toLocaleString() }}</p>
+  </div>
 </template>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.city-container {
+  text-align: center;
+  margin-top: 5rem;
+  padding: 1rem;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 300px;
+  @include card;
+}
+h1 {
+  color: white;
+}
+</style>
