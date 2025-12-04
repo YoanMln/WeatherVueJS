@@ -3,8 +3,6 @@ import City from "@/components/City.vue";
 </script>
 
 <template>
-  <h1>Weather - List of cities</h1>
-
   <City
     name="Annecy"
     weather="Ensoleillé"

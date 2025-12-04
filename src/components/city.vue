@@ -1,20 +1,30 @@
 <script setup>
-import { reactive } from "vue";
-
-const city = reactive({
-  name: "Annecy",
-  weather: "Nuageux",
-  temperature: "8 degrés",
-  updateAt: new Date(),
+defineProps({
+  name: {
+    type: String,
+    required: true,
+  },
+  weather: {
+    type: String,
+    required: true,
+  },
+  temperature: {
+    type: Number,
+    required: true,
+  },
+  updatedAt: {
+    type: String,
+    required: true,
+  },
 });
 </script>
 
 <template>
   <div class="city-container">
-    <h1>{{ city.name }}</h1>
-    <p>Météo {{ city.weather }}</p>
-    <p>Température {{ city.temperature }}</p>
-    <p>MAJ {{ city.updateAt.toLocaleString() }}</p>
+    <h1>{{ name }}</h1>
+    <p>Météo : {{ weather }}</p>
+    <p>Température : {{ temperature }}°C</p>
+    <p>MAJ : {{ updatedAt }}</p>
   </div>
 </template>
 

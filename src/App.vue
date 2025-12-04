@@ -8,7 +8,7 @@ import { RouterView } from "vue-router";
     <nav>
       <router-link to="/">Accueil</router-link>
       <router-link to="/villes">Liste des Villes</router-link>
-      <router-link to="/city">Ville</router-link>
+      <router-link to="/ville">Ville</router-link>
     </nav>
 
     <RouterView></RouterView>
@@ -22,8 +22,5 @@ import { RouterView } from "vue-router";
 nav {
   display: flex;
   justify-content: space-around;
-
-  
 }
 </style>
- 
