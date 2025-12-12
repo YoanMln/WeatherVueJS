@@ -10,7 +10,12 @@
 
 @import "./src/scss/base/base";
 
+// ELEMENTS //
 
-// ELEMENTS // 
+@import "./src/scss/elements/buttons";
 
-@import "./src/scss/elements/buttons"
+// MAP //
+@import "./src/scss/pages/map";
+
+// RESPONSIVE //
+@import "./src/scss/utilities/responsive";

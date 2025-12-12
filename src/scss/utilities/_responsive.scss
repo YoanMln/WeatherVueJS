@@ -1,0 +1,20 @@
+@media (max-width: 768px) {
+  #map {
+    height: 400px;
+  }
+
+  .map-header {
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+  }
+
+  .header-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .add-btn {
+    width: 100%;
+  }
+}
