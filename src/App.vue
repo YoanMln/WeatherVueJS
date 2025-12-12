@@ -4,7 +4,7 @@ import { RouterView } from "vue-router";
 
 <template>
   <div class="app">
-    <h1 class="title">Weather-App</h1>
+     
     <nav>
       <router-link to="/">Accueil</router-link>
       <router-link to="/villes">Liste des Villes</router-link>
@@ -22,5 +22,6 @@ import { RouterView } from "vue-router";
 nav {
   display: flex;
   justify-content: space-around;
+  margin-top: 3rem;
 }
 </style>

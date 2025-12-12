@@ -4,7 +4,7 @@ import CitiesMap from "@/components/CitiesMap.vue";
 
 <template>
   <div class="home-container">
-    <h1>Accueil</h1>
+     
     <CitiesMap />
   </div>
 </template>
