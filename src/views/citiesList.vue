@@ -32,10 +32,12 @@ onMounted(() => {
 });
 </script>
 
+
+
 <template>
   <div class="container-title">
-    <h1 class="title-citiesList">Weather</h1>
-    <h2>Liste des villes</h2>
+    
+    
   </div>
   <p v-if="loading">Requête en cours...</p>
   <p v-if="error" style="color: red">{{ error }}</p>
