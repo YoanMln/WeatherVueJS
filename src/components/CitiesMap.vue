@@ -21,7 +21,7 @@ L.Icon.Default.mergeOptions({
   shadowUrl: markerShadow,
 });
 
-const API_KEY = "160ea62556fee24be34561eb778643b1";
+const API_KEY = import.meta.env.VITE_OPENWEATHER_API_KEY;
 
 const cities = ref([]);
 const selectedCity = ref(null);

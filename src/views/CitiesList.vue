@@ -6,7 +6,7 @@ const cities = ref([]);
 const loading = ref(false);
 const error = ref(null);
 
-const API_KEY = "160ea62556fee24be34561eb778643b1";
+const API_KEY = import.meta.env.VITE_OPENWEATHER_API_KEY;
 
 async function fetchCitiesWeather() {
   loading.value = true;
@@ -32,31 +32,25 @@ onMounted(() => {
 });
 </script>
 
-
-
 <template>
-  <div class="container-title">
-    
-    
-  </div>
+  <div class="container-title"></div>
   <p v-if="loading">Requête en cours...</p>
   <p v-if="error" style="color: red">{{ error }}</p>
   <div class="city-container">
-  <City
-    v-for="city in cities"
-    :key="city.id"
-    :name="city.name"
-    :weather="city.weather[0].description"
-    :temperature="city.main.temp"
-    :updatedAt="new Date(city.dt * 1000).toLocaleTimeString()"
-  />
-</div>
+    <City
+      v-for="city in cities"
+      :key="city.id"
+      :name="city.name"
+      :weather="city.weather[0].description"
+      :temperature="city.main.temp"
+      :updatedAt="new Date(city.dt * 1000).toLocaleTimeString()"
+    />
+  </div>
 </template>
 
 <style scoped>
 .container-title {
   text-align: center;
-  
 }
 
 .city-container {
@@ -64,7 +58,5 @@ onMounted(() => {
   grid-template-columns: repeat(3, 1fr);
   gap: 2rem;
   margin: 0;
- ;
-  
 }
 </style>

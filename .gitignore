@@ -37,3 +37,8 @@ __screenshots__/
 
 
 .node_modules
+
+
+.env
+.env.local
+.env.*.local
