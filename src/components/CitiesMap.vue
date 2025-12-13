@@ -30,35 +30,46 @@ const cityName = ref("");
 const isLoading = ref(false);
 const errorMessage = ref("");
 
-const getWeatherIcon = (weather) => {
+const getWeatherIcon = (weather, isNight = false) => {
   const icons = {
-    sun: "☀️",
-    cloud: "☁️",
+    sun: isNight ? "🌑" : "☀️",
+    cloud: isNight ? "☁️🌑" : "☁️",
     rain: "🌧️",
     snow: "❄️",
     storm: "⛈️",
   };
-  return icons[weather] || "🌤️";
+  return icons[weather] || (isNight ? "🌑" : "🌤️");
 };
 
-const getWeatherText = (weather) => {
+const getWeatherText = (weather, isNight = false) => {
   const texts = {
-    sun: "Ensoleillé",
-    cloud: "Nuageux",
+    sun: isNight ? "Nuit claire" : "Ensoleillé",
+    cloud: isNight ? "Nuageux (nuit)" : "Nuageux",
     rain: "Pluvieux",
     snow: "Neigeux",
     storm: "Orageux",
   };
-  return texts[weather] || "Partiellement nuageux";
+  return (
+    texts[weather] ||
+    (isNight ? "Nuit partiellement nuageuse" : "Partiellement nuageux")
+  );
 };
 
-const getWeatherType = (main) => {
-  if (main === "Clear") return "sun";
-  if (main === "Clouds") return "cloud";
-  if (main === "Rain" || main === "Drizzle") return "rain";
-  if (main === "Snow") return "snow";
-  if (main === "Thunderstorm") return "storm";
-  return "cloud";
+const getWeatherType = (main, icon) => {
+  const isNight = icon?.includes("n");
+  const type =
+    main === "Clear"
+      ? "sun"
+      : main === "Clouds"
+      ? "cloud"
+      : main === "Rain" || main === "Drizzle"
+      ? "rain"
+      : main === "Snow"
+      ? "snow"
+      : main === "Thunderstorm"
+      ? "storm"
+      : "cloud";
+  return { type, isNight };
 };
 
 const selectCity = (city) => {
@@ -104,13 +115,18 @@ const addCityByName = async () => {
     );
 
     const weatherData = await weatherResponse.json();
+    const weatherInfo = getWeatherType(
+      weatherData.weather[0].main,
+      weatherData.weather[0].icon
+    );
 
     const newCity = {
       id: Date.now(),
       name: cityData.display_name.split(",")[0],
       lat: lat,
       lon: lon,
-      weather: getWeatherType(weatherData.weather[0].main),
+      weather: weatherInfo.type,
+      isNight: weatherInfo.isNight,
       temperature: Math.round(weatherData.main.temp),
       description: weatherData.weather[0].description,
       humidity: weatherData.main.humidity,
@@ -149,12 +165,18 @@ onMounted(async () => {
       );
       const weatherData = await weatherResponse.json();
 
+      const weatherInfo = getWeatherType(
+        weatherData.weather[0].main,
+        weatherData.weather[0].icon
+      );
+
       cities.value.push({
         id: Date.now() + Math.random(),
         name: city.name,
         lat: city.lat,
         lon: city.lon,
-        weather: getWeatherType(weatherData.weather[0].main),
+        weather: weatherInfo.type,
+        isNight: weatherInfo.isNight,
         temperature: Math.round(weatherData.main.temp),
         description: weatherData.weather[0].description,
         humidity: weatherData.main.humidity,
@@ -211,7 +233,9 @@ onMounted(async () => {
         <div class="city-item" v-for="city in cities" :key="city.id">
           <span class="city-name">{{ city.name }}</span>
           <div class="city-info">
-            <span class="city-weather">{{ getWeatherIcon(city.weather) }}</span>
+            <span class="city-weather">{{
+              getWeatherIcon(city.weather, city.isNight)
+            }}</span>
             <span class="city-temp" v-if="city.temperature"
               >{{ city.temperature }}°C</span
             >
@@ -247,11 +271,11 @@ onMounted(async () => {
               <h3>{{ city.name }}</h3>
               <div class="weather-info">
                 <span class="weather-icon">{{
-                  getWeatherIcon(city.weather)
+                  getWeatherIcon(city.weather, city.isNight)
                 }}</span>
                 <div class="weather-details">
                   <span class="weather-text">{{
-                    getWeatherText(city.weather)
+                    getWeatherText(city.weather, city.isNight)
                   }}</span>
                   <span class="weather-temp" v-if="city.temperature">
                     {{ city.temperature }}°C
