@@ -1,48 +1,43 @@
 <script setup>
-import { ref, onMounted } from "vue";
-import City from "@/components/City.vue";
-
-const API_KEY = import.meta.env.VITE_OPENWEATHER_API_KEY;
-
-const cityName = ref("Annecy");
-const weather = ref("");
-const temperature = ref(0);
-const updatedAt = ref("");
-const loading = ref(false);
-const error = ref(null);
-
-const fetchWeather = async (city) => {
-  loading.value = true;
-  error.value = null;
-
-  try {
-    const response = await fetch(
-      `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric&lang=fr`
-    );
-    if (!response.ok) {
-      throw new Error("ville non trouvé");
+  import { ref, onMounted } from "vue";
+  import City from "@/components/City.vue";
+  import { getWeatherByCity } from "@/services/weatherService"; 
+  
+  const API_KEY = import.meta.env.VITE_OPENWEATHER_API_KEY;
+  
+  const cityName = ref("Annecy");
+  const weather = ref("");
+  const temperature = ref(0);
+  const updatedAt = ref("");
+  const loading = ref(false);
+  const error = ref(null);
+  
+  const fetchWeather = async (city) => {
+    loading.value = true;
+    error.value = null;
+  
+    try {
+      const data = await getWeatherByCity(city); 
+  
+      cityName.value = data.name;
+      weather.value = data.weather[0].description;
+      temperature.value = Math.round(data.main.temp);
+      updatedAt.value = new Date(data.dt * 1000).toLocaleTimeString("fr-FR");
+    } catch (err) {
+      error.value = err.message;
+    } finally {
+      loading.value = false;
     }
-    const data = await response.json();
-
-    cityName.value = data.name;
-    weather.value = data.weather[0].description;
-    temperature.value = Math.round(data.main.temp);
-    updatedAt.value = new Date(data.dt * 1000).toLocaleTimeString("fr-FR");
-  } catch (err) {
-    error.value = error.message;
-  } finally {
-    loading.value = false;
-  }
-};
-
-onMounted(() => {
-  fetchWeather("Annecy");
-});
-
-const changeCity = (newCity) => {
-  fetchWeather(newCity);
-};
-</script>
+  };
+  
+  onMounted(() => {
+    fetchWeather("Annecy");
+  });
+  
+  const changeCity = (newCity) => {
+    fetchWeather(newCity);
+  };
+  </script>
 
 <template>
   <div class="city-view">
