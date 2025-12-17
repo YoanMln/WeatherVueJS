@@ -323,7 +323,7 @@ onMounted(async () => {
   align-items: center;
   padding: 1.5rem;
   @include card;
-  color: white;
+  color: black;
 }
 
 .map-header h2 {
@@ -347,7 +347,7 @@ onMounted(async () => {
 
 .add-btn {
   @include card;
-  color: white;
+  color: black;
   padding: 10px;
   border-radius: 20px;
   cursor: pointer;
@@ -369,7 +369,7 @@ onMounted(async () => {
 
 .add-form h3 {
   margin: 0 0 1.5rem 0;
-  color: white;
+  color: black;
 }
 
 .simple-form {
@@ -388,7 +388,7 @@ onMounted(async () => {
 }
 
 ::placeholder {
-  color: white;
+  color: black;
 }
 
 .city-input:focus {
@@ -437,7 +437,7 @@ onMounted(async () => {
 
 .cities-list h3 {
   margin: 0 0 1rem 0;
-  color: white;
+  color: black;
   font-size: 1.1rem;
 }
 
@@ -460,7 +460,7 @@ onMounted(async () => {
 .city-name {
   flex: 1;
   font-weight: 600;
-  color: white;
+  color: black;
 }
 
 .city-info {
