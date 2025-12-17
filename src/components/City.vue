@@ -35,7 +35,7 @@ const formattedDate = computed(() => {
       <h1>📍{{ name }}</h1>
       <p>Météo: {{ weather }}</p>
       <p>Température: {{ temperature }}°C</p>
-      <p>MAJ: {{ formattedDate }}</p>
+      <p>Mise à jour: {{ formattedDate }}</p>
     </div>
   </div>
 </template>
@@ -51,6 +51,8 @@ const formattedDate = computed(() => {
 
   .city-card {
     @include city-card;
+    font-size: 16px;
+    font-weight: 700;
     border-radius: 20px;
     text-align: center;
     min-height: 200px;

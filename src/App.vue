@@ -56,7 +56,7 @@ const weatherClass = computed(() => {
         <p>Chargement en cours</p>
       </div>
       <nav v-else>
-        <router-link to="/">Accueil</router-link>
+        <router-link to="/">Carte</router-link>
         <router-link to="/villes">Liste des Villes</router-link>
         <router-link to="/ville">Ville</router-link>
       </nav>
@@ -88,5 +88,6 @@ nav {
   display: flex;
   justify-content: space-around;
   margin-top: 3rem;
+  font-weight:700;
 }
 </style>
