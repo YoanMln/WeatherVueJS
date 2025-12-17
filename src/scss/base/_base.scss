@@ -22,7 +22,14 @@ body {
   }
 
   #app.bg-default {
-    background-color: white;
+    background: url(/images/weatherBackground/default.webp) center/cover
+      no-repeat fixed;
     @include overlay;
+  }
+
+  #app.bg-none {
+    background: url(/images/weatherBackground/default.webp) center/cover
+      no-repeat fixed;
+    @include overlay-background;
   }
 }

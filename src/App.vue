@@ -4,12 +4,12 @@ import { ref, onMounted, computed } from "vue";
 import { getWeatherByCoords } from "./services/weatherService";
 
 const weatherMain = ref(null);
-
+const isLoading = ref(true);
 
 onMounted(() => {
   if (!navigator.geolocation) {
     weatherMain.value = "default";
-    
+    isLoading.value = false;
     return;
   }
 
@@ -24,12 +24,11 @@ onMounted(() => {
         console.log("erreur background météo", err);
         weatherMain.value = "default";
       } finally {
-       
+        isLoading.value = false;
       }
     },
     () => {
       weatherMain.value = "default";
-    
     }
   );
 });
@@ -62,7 +61,7 @@ const weatherClass = computed(() => {
         <router-link to="/ville">Ville</router-link>
       </nav>
 
-      <RouterView></RouterView>
+      <RouterView v-if="!isLoading"></RouterView>
     </div>
   </div>
 </template>
@@ -90,7 +89,4 @@ nav {
   justify-content: space-around;
   margin-top: 3rem;
 }
-
-
-
 </style>
