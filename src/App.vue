@@ -7,7 +7,15 @@ const weatherMain = ref(null);
 const isLoading = ref(true);
 
 onMounted(() => {
+  const timeout = setTimeout(() => {
+    if (isLoading.value) {
+      weatherMain.value = "default";
+      isLoading.value = false;
+    }
+  }, 3000);
+
   if (!navigator.geolocation) {
+    clearTimeout(timeout);
     weatherMain.value = "default";
     isLoading.value = false;
     return;
@@ -15,6 +23,7 @@ onMounted(() => {
 
   navigator.geolocation.getCurrentPosition(
     async (position) => {
+      clearTimeout(timeout);
       const { latitude, longitude } = position.coords;
 
       try {
@@ -28,7 +37,9 @@ onMounted(() => {
       }
     },
     () => {
+      clearTimeout(timeout);
       weatherMain.value = "default";
+      isLoading.value = false;
     }
   );
 });
@@ -88,6 +99,6 @@ nav {
   display: flex;
   justify-content: space-around;
   margin-top: 3rem;
-  font-weight:700;
+  font-weight: 700;
 }
 </style>
