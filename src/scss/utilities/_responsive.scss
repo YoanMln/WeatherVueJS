@@ -1,4 +1,8 @@
 @media (max-width: 768px) {
+  #app {
+    background-attachment: scroll !important;
+  }
+
   #map {
     height: 400px;
   }
