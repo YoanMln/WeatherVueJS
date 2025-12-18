@@ -1,5 +1,6 @@
 const API_KEY = import.meta.env.VITE_OPENWEATHER_API_KEY;
 const BASE_URL = "https://api.openweathermap.org/data/2.5/weather";
+const URL_FORECAST = "https://api.openweathermap.org/data/2.5/forecast";
 
 async function fetchWeather(url) {
   const response = await fetch(url);
@@ -11,9 +12,9 @@ async function fetchWeather(url) {
   return response.json();
 }
 
-// Recupere les data pour une ville //
+// Recupere les data pour une ville + prévisions //
 export async function getWeatherByCity(city) {
-  const url = `${BASE_URL}?q=${city}&appid=${API_KEY}&units=metric&lang=fr`;
+  const url = `${URL_FORECAST}?q=${city}&appid=${API_KEY}&units=metric&lang=fr&cnt=40`;
   return fetchWeather(url);
 }
 
